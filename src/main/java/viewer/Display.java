@@ -1,6 +1,7 @@
 package viewer;
 
 import image.*;
+import image.impl.RasterImageType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -23,8 +24,8 @@ public class Display implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        // TODO : rajouter la création d'une fabrique d'image pour initialiser imageFactory
+        //this.imageFactory = new RasterUniformImageFactory(200, 200, Color.RED, RasterImageType.BRUTE);
+        this.imageFactory = new RasterFlagFactory(200, 200, Color.BLUE, Color.WHITE, Color.RED, RasterImageType.BRUTE);
 
         this.image = imageFactory.makeImage();
 
