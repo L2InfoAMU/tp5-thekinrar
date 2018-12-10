@@ -4,14 +4,12 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class VectorImage implements Image {
+public class VectorImage extends Image {
 
-    private int width, height;
     private List<Shape> shapes;
 
     VectorImage(List<Shape> shapes, int width, int height) {
-        setWidth(width);
-        setHeight(height);
+        super(width, height);
 
         this.shapes = shapes;
     }
@@ -25,23 +23,5 @@ public class VectorImage implements Image {
                 .map(Shape::getColor)
                 .findFirst()
                 .orElse(Color.WHITE);
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    protected void setWidth(int width) {
-        this.width = width;
-    }
-
-    protected void setHeight(int height) {
-        this.height = height;
     }
 }
