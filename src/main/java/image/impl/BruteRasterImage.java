@@ -1,37 +1,21 @@
 package image.impl;
 
-import image.Image;
 import javafx.scene.paint.Color;
-import util.Matrices;
 
-public class BruteRasterImage implements Image {
+public class BruteRasterImage extends RasterImage {
 
-    private int width;
-    private int height;
     private Color[][] pixels;
 
     public BruteRasterImage(Color color, int width, int height) {
-        this.width = width;
-        this.height = height;
-
-        createRepresentation();
-        setPixelsColor(color);
+        super(color, width, height);
     }
 
     public BruteRasterImage(Color[][] colors) {
-        Matrices.requiresNonNull(colors);
-        Matrices.requiresRectangularMatrix(colors);
-        Matrices.requiresNonZeroDimensions(colors);
-
-        width = colors.length;
-        height = colors[0].length;
-
-        createRepresentation();
-        setPixelsColor(colors);
+        super(colors);
     }
 
     public void createRepresentation() {
-        pixels = new Color[width][height];
+        pixels = new Color[getWidth()][getHeight()];
     }
 
     public void setPixelColor(Color color, int x, int y) {
@@ -41,39 +25,5 @@ public class BruteRasterImage implements Image {
     @Override
     public Color getPixelColor(int x, int y) {
         return pixels[x][y];
-    }
-
-    private void setPixelsColor(Color[][] pixels) {
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < height; ++y) {
-                setPixelColor(pixels[x][y], x, y);
-            }
-        }
-    }
-
-    private void setPixelsColor(Color color) {
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < height; ++y) {
-                setPixelColor(color, x, y);
-            }
-        }
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    protected void setWidth(int width) {
-        this.width = width;
-    }
-
-    protected void setHeight(int height) {
-        this.height = height;
     }
 }
